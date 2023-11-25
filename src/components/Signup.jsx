@@ -1,10 +1,24 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../firbase/firbaseConfig";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  async function signUpUser(e) {
+    e.preventDefault();
+    try {
+      console.log(password, confirmPassword);
+      if (password === confirmPassword) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <div className="container">
@@ -12,7 +26,7 @@ function Signup() {
           <h2> Sign Up</h2>
           <p>Continue your journey with our Product</p>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={signUpUser}>
           <div className="email-container">
             <label htmlFor="email">Email</label>
             <input
@@ -43,7 +57,9 @@ function Signup() {
               value={confirmPassword}
             />
           </div>
-          <button className="btn">Sign Up</button>
+          <button className="btn" type="submit">
+            Sign Up
+          </button>
         </form>
       </div>
       <p className="bottom">
