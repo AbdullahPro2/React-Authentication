@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans";
+}
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  border: 2px solid grey;
+  padding: 2rem;
+}
+.login-heading {
+  margin-bottom: 2rem;
+}
+.login-heading h2 {
+  margin-bottom: 10px;
+}
+.form {
+  font-size: 1.3rem;
+}
+.email-container,
+.password-container,
+.password-confirm-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.btn {
+  background-color: rgb(61, 144, 177);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+input {
+  font-size: 1.2rem;
+  padding: 0.2rem 0.5rem;
+  font-family: sans-serif;
+}
+.bottom {
+  margin-top: 10px;
+}
+.link {
+  font-weight: bolder;
+}
