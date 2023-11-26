@@ -1,10 +1,27 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firbase/firbaseConfig";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
+  async function handleLogin(e) {
+    e.preventDefault();
+    try {
+      signInWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
+          console.log(userCredential.user.email);
+          navigate("/welcome");
+        }
+      );
+    } catch (error) {
+      console.log("Error Occured while logging In");
+      console.error(error);
+    }
+  }
   return (
     <>
       <div className="container">
@@ -12,7 +29,7 @@ function Login() {
           <h2>Login</h2>
           <p>Continue your journey with our Product</p>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={handleLogin}>
           <div className="email-container">
             <label htmlFor="email">Email</label>
             <input
@@ -33,7 +50,9 @@ function Login() {
               value={password}
             />
           </div>
-          <button className="btn">Login</button>
+          <button className="btn" type="submit">
+            Login
+          </button>
         </form>
       </div>
       <p className="bottom">

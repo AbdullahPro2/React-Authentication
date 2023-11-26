@@ -1,19 +1,25 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firbase/firbaseConfig";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const navigate = useNavigate();
   async function signUpUser(e) {
     e.preventDefault();
     try {
-      console.log(password, confirmPassword);
       if (password === confirmPassword) {
-        await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password).then(
+          (userCredential) => {
+            console.log(userCredential.user.email);
+            navigate("/login");
+          }
+        );
+      } else {
+        throw new Error("Password Does not match");
       }
     } catch (error) {
       console.log(error);
