@@ -14,6 +14,7 @@ function App() {
 
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
+        // will provide everytime auth state changes
         if (user) {
           // User is authenticated
           setAuthenticated(true);
